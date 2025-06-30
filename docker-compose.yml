@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      # Важно: монтируем основные папки и package.json.
+      # package-lock.json удален из volumes, чтобы избежать конфликта монтирования.
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./tailwind.config.js:/app/tailwind.config.js
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./package.json:/app/package.json
+      # - ./package-lock.json:/app/package-lock.json  <-- ЭТА СТРОКА УДАЛЕНА ИЛИ ЗАКОММЕНТИРОВАНА
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    command: npm start

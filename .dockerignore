@@ -1,0 +1,12 @@
+# Игнорируем папку node_modules, чтобы она не копировалась в контекст сборки
+node_modules/
+
+# Игнорируем папку build, так как она генерируется при сборке
+build/
+
+# Игнорируем файлы Git-репозитория
+.git/
+.gitignore
+
+# Важно: package.json и package-lock.json НЕ должны быть здесь
+# Они нужны для COPY в Dockerfile и монтируются через volumes (только package.json)
